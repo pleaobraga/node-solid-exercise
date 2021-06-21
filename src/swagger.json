@@ -1,0 +1,247 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "User Documentation",
+        "description": "This is an API User",
+        "version": "1.0.0",
+        "contact": {
+            "email":"pleao.braga@gmail.com"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": ["User"],
+                "sumary": "create user",
+                "description": "create new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties":{
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "name": "pedro",
+                                "email": "pleao.braga@gmail.com"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content":{
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "admin": {
+                                            "type": "boolean"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date"
+                                        },
+                                        "create_at": {
+                                            "type": "string",
+                                            "format": "date"
+                                        }
+                                    }
+                                
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User already exists"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+
+            },
+            "get": {
+                "tags": ["User"],
+                "sumary": "List all users",
+                "description": "List all users",
+                "parameters": [{
+                    "in": "header",
+                    "name": "user_id",
+                    "description": "user id",
+                    "required": true,
+                    "schema":{
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content":{
+                            "application/json":{
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties":{
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "admin": {
+                                                "type": "boolean"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date"
+                                            },
+                                            "create_at": {
+                                                "type": "string",
+                                                "format": "date"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "This user is not an admin"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+         "/users/{user_id}": {
+             "get": {
+                "tags": ["User"],
+                "sumary": "Show user",
+                "description": "Show user",
+                "parameters": [{
+                    "in": "path",
+                    "name": "user_id",
+                    "description": "user id",
+                    "required": true,
+                    "schema":{
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content":{
+                            "application/json":{
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties":{
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "admin": {
+                                                "type": "boolean"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date"
+                                            },
+                                            "create_at": {
+                                                "type": "string",
+                                                "format": "date"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "This user does not exist"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+         },
+         "/users/{user_id}/admin": {
+             "patch": {
+                "tags": ["User"],
+                "sumary": "update user to admin",
+                "description": "update user to admin",
+                "parameters": [{
+                    "in": "path",
+                    "name": "user_id",
+                    "description": "user id",
+                    "required": true,
+                    "schema":{
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content":{
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "admin": {
+                                            "type": "boolean"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date"
+                                        },
+                                        "create_at": {
+                                            "type": "string",
+                                            "format": "date"
+                                        }
+                                    }
+                                
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User does not exist"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+
+            }
+
+         }
+
+    } 
+}
